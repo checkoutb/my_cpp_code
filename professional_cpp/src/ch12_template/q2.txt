@@ -1,0 +1,106 @@
+In file included from /usr/include/c++/13/bits/stl_iterator.h:85,
+                 from /usr/include/c++/13/bits/stl_algobase.h:67,
+                 from /usr/include/c++/13/vector:62,
+of module /usr/include/c++/13/vector, imported at grid.cc:7,
+of module grid, imported at main.cpp:4:
+/usr/include/c++/13/bits/stl_construct.h: In instantiation of ‘constexpr void std::_Construct(_Tp*, _Args&& ...) [with _Tp = vector<optional<int>, allocator<optional<int> > >; _Args = {}]’:
+/usr/include/c++/13/bits/stl_uninitialized.h:643:18:   required from ‘static constexpr _ForwardIterator std::__uninitialized_default_n_1<_TrivialValueType>::__uninit_default_n(_ForwardIterator, _Size) [with _ForwardIterator = std::vector<std::optional<int>, std::allocator<std::optional<int> > >*; _Size = long unsigned int; bool _TrivialValueType = false]’
+/usr/include/c++/13/bits/stl_uninitialized.h:701:22:   required from ‘constexpr _ForwardIterator std::__uninitialized_default_n(_ForwardIterator, _Size) [with _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Size = long unsigned int]’
+/usr/include/c++/13/bits/stl_uninitialized.h:779:44:   required from ‘constexpr _ForwardIterator std::__uninitialized_default_n_a(_ForwardIterator, _Size, allocator<_Tp>&) [with _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Size = long unsigned int; _Tp = vector<optional<int>, allocator<optional<int> > >]’
+/usr/include/c++/13/bits/vector.tcc:650:35:   required from ‘constexpr void std::vector<_Tp, _Alloc>::_M_default_append(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+/usr/include/c++/13/bits/stl_vector.h:1013:4:   required from ‘constexpr void std::vector<_Tp, _Alloc>::resize(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+grid.cc:60:19:   required from ‘Grid@grid<T>::Grid(size_t, size_t) [with T = int; size_t = long unsigned int]’
+main.cpp:25:20:   required from here
+/usr/include/c++/13/bits/stl_construct.h:115:28: 错误：对‘construct_at(std::vector<std::optional<int>, std::allocator<std::optional<int> > >*&)’的调用没有匹配的函数
+  115 |           std::construct_at(__p, std::forward<_Args>(__args)...);
+      |           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/13/bits/stl_construct.h:94:5: 附注：candidate: ‘template<class _Tp, class ... _Args> constexpr decltype (::new(void*(0)) _Tp) std::construct_at(_Tp*, _Args&& ...)’
+   94 |     construct_at(_Tp* __location, _Args&&... __args)
+      |     ^~~~~~~~~~~~
+/usr/include/c++/13/bits/stl_construct.h:94:5: 附注：  template argument deduction/substitution failed:
+/usr/include/c++/13/bits/stl_construct.h: In substitution of ‘template<class _Tp, class ... _Args> constexpr decltype (::new(void*(0)) _Tp) std::construct_at(_Tp*, _Args&& ...) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Args = {}]’:
+/usr/include/c++/13/bits/stl_construct.h:115:21:   required from ‘constexpr void std::_Construct(_Tp*, _Args&& ...) [with _Tp = vector<optional<int>, allocator<optional<int> > >; _Args = {}]’
+/usr/include/c++/13/bits/stl_uninitialized.h:643:18:   required from ‘static constexpr _ForwardIterator std::__uninitialized_default_n_1<_TrivialValueType>::__uninit_default_n(_ForwardIterator, _Size) [with _ForwardIterator = std::vector<std::optional<int>, std::allocator<std::optional<int> > >*; _Size = long unsigned int; bool _TrivialValueType = false]’
+/usr/include/c++/13/bits/stl_uninitialized.h:701:22:   required from ‘constexpr _ForwardIterator std::__uninitialized_default_n(_ForwardIterator, _Size) [with _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Size = long unsigned int]’
+/usr/include/c++/13/bits/stl_uninitialized.h:779:44:   required from ‘constexpr _ForwardIterator std::__uninitialized_default_n_a(_ForwardIterator, _Size, allocator<_Tp>&) [with _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Size = long unsigned int; _Tp = vector<optional<int>, allocator<optional<int> > >]’
+/usr/include/c++/13/bits/vector.tcc:650:35:   required from ‘constexpr void std::vector<_Tp, _Alloc>::_M_default_append(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+/usr/include/c++/13/bits/stl_vector.h:1013:4:   required from ‘constexpr void std::vector<_Tp, _Alloc>::resize(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+grid.cc:60:19:   required from ‘Grid@grid<T>::Grid(size_t, size_t) [with T = int; size_t = long unsigned int]’
+main.cpp:25:20:   required from here
+/usr/include/c++/13/bits/stl_construct.h:96:17: 错误：对‘operator new(sizetype, void*)’的调用没有匹配的函数
+   96 |     -> decltype(::new((void*)0) _Tp(std::declval<_Args>()...))
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/13/bits/stl_iterator.h:82:
+/usr/include/c++/13/new:126:26: 附注：candidate: ‘void* operator new(std::size_t)’
+  126 | _GLIBCXX_NODISCARD void* operator new(std::size_t) _GLIBCXX_THROW (std::bad_alloc)
+      |                          ^~~~~~~~
+/usr/include/c++/13/new:126:26: 附注： 备选需要 1 实参，但提供了 2 个
+/usr/include/c++/13/new:149:26: 附注：candidate: ‘void* operator new(std::size_t, std::align_val_t)’
+  149 | _GLIBCXX_NODISCARD void* operator new(std::size_t, std::align_val_t)
+      |                          ^~~~~~~~
+/usr/include/c++/13/new:149:26: 附注：  no known conversion for argument 2 from ‘void*’ to ‘std::align_val_t’
+/usr/include/c++/13/bits/stl_construct.h: In instantiation of ‘constexpr void std::_Construct(_Tp*, _Args&& ...) [with _Tp = vector<optional<int>, allocator<optional<int> > >; _Args = {}]’:
+/usr/include/c++/13/bits/stl_uninitialized.h:643:18:   required from ‘static constexpr _ForwardIterator std::__uninitialized_default_n_1<_TrivialValueType>::__uninit_default_n(_ForwardIterator, _Size) [with _ForwardIterator = std::vector<std::optional<int>, std::allocator<std::optional<int> > >*; _Size = long unsigned int; bool _TrivialValueType = false]’
+/usr/include/c++/13/bits/stl_uninitialized.h:701:22:   required from ‘constexpr _ForwardIterator std::__uninitialized_default_n(_ForwardIterator, _Size) [with _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Size = long unsigned int]’
+/usr/include/c++/13/bits/stl_uninitialized.h:779:44:   required from ‘constexpr _ForwardIterator std::__uninitialized_default_n_a(_ForwardIterator, _Size, allocator<_Tp>&) [with _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Size = long unsigned int; _Tp = vector<optional<int>, allocator<optional<int> > >]’
+/usr/include/c++/13/bits/vector.tcc:650:35:   required from ‘constexpr void std::vector<_Tp, _Alloc>::_M_default_append(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+/usr/include/c++/13/bits/stl_vector.h:1013:4:   required from ‘constexpr void std::vector<_Tp, _Alloc>::resize(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+grid.cc:60:19:   required from ‘Grid@grid<T>::Grid(size_t, size_t) [with T = int; size_t = long unsigned int]’
+main.cpp:25:20:   required from here
+/usr/include/c++/13/bits/stl_construct.h:119:7: 错误：对‘operator new(sizetype, void*)’的调用没有匹配的函数
+  119 |       ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/13/new:126:26: 附注：candidate: ‘void* operator new(std::size_t)’
+  126 | _GLIBCXX_NODISCARD void* operator new(std::size_t) _GLIBCXX_THROW (std::bad_alloc)
+      |                          ^~~~~~~~
+/usr/include/c++/13/new:126:26: 附注： 备选需要 1 实参，但提供了 2 个
+/usr/include/c++/13/new:149:26: 附注：candidate: ‘void* operator new(std::size_t, std::align_val_t)’
+  149 | _GLIBCXX_NODISCARD void* operator new(std::size_t, std::align_val_t)
+      |                          ^~~~~~~~
+/usr/include/c++/13/new:149:26: 附注：  no known conversion for argument 2 from ‘void*’ to ‘std::align_val_t’
+In file included from /usr/include/c++/13/ext/alloc_traits.h:34,
+                 from /usr/include/c++/13/bits/basic_string.h:39,
+                 from /usr/include/c++/13/string:54,
+                 from /usr/include/c++/13/stdexcept:39,
+of module /usr/include/c++/13/stdexcept, imported at grid.cc:9,
+of module grid, imported at main.cpp:4:
+/usr/include/c++/13/bits/alloc_traits.h: In instantiation of ‘static constexpr void std::allocator_traits<std::allocator<_Up> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Args = {std::vector<std::optional<int>, std::allocator<std::optional<int> > >}; _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; allocator_type = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >]’:
+/usr/include/c++/13/bits/stl_uninitialized.h:1078:26:   required from ‘constexpr void std::__relocate_object_a(_Tp*, _Up*, _Allocator&) [with _Tp = vector<optional<int>, allocator<optional<int> > >; _Up = vector<optional<int>, allocator<optional<int> > >; _Allocator = allocator<vector<optional<int>, allocator<optional<int> > > >]’
+/usr/include/c++/13/bits/stl_uninitialized.h:1106:26:   required from ‘constexpr _ForwardIterator std::__relocate_a_1(_InputIterator, _InputIterator, _ForwardIterator, _Allocator&) [with _InputIterator = vector<optional<int>, allocator<optional<int> > >*; _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Allocator = allocator<vector<optional<int>, allocator<optional<int> > > >]’
+/usr/include/c++/13/bits/stl_uninitialized.h:1148:33:   required from ‘constexpr _ForwardIterator std::__relocate_a(_InputIterator, _InputIterator, _ForwardIterator, _Allocator&) [with _InputIterator = vector<optional<int>, allocator<optional<int> > >*; _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Allocator = allocator<vector<optional<int>, allocator<optional<int> > > >]’
+/usr/include/c++/13/bits/stl_vector.h:506:26:   required from ‘static constexpr std::vector<_Tp, _Alloc>::pointer std::vector<_Tp, _Alloc>::_S_relocate(pointer, pointer, pointer, _Tp_alloc_type&) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; pointer = std::vector<std::optional<int>, std::allocator<std::optional<int> > >*; _Tp_alloc_type = std::vector<std::vector<std::optional<int>, std::allocator<std::optional<int> > >, std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > > >::_Tp_alloc_type]’
+/usr/include/c++/13/bits/vector.tcc:676:16:   required from ‘constexpr void std::vector<_Tp, _Alloc>::_M_default_append(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+/usr/include/c++/13/bits/stl_vector.h:1013:4:   required from ‘constexpr void std::vector<_Tp, _Alloc>::resize(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+grid.cc:60:19:   required from ‘Grid@grid<T>::Grid(size_t, size_t) [with T = int; size_t = long unsigned int]’
+main.cpp:25:20:   required from here
+/usr/include/c++/13/bits/alloc_traits.h:539:28: 错误：对‘construct_at(std::vector<std::optional<int>, std::allocator<std::optional<int> > >*&, std::vector<std::optional<int>, std::allocator<std::optional<int> > >)’的调用没有匹配的函数
+  539 |           std::construct_at(__p, std::forward<_Args>(__args)...);
+      |           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/13/bits/stl_construct.h:94:5: 附注：candidate: ‘template<class _Tp, class ... _Args> constexpr decltype (::new(void*(0)) _Tp) std::construct_at(_Tp*, _Args&& ...)’
+   94 |     construct_at(_Tp* __location, _Args&&... __args)
+      |     ^~~~~~~~~~~~
+/usr/include/c++/13/bits/stl_construct.h:94:5: 附注：  template argument deduction/substitution failed:
+/usr/include/c++/13/bits/stl_construct.h: In substitution of ‘template<class _Tp, class ... _Args> constexpr decltype (::new(void*(0)) _Tp) std::construct_at(_Tp*, _Args&& ...) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Args = {std::vector<std::optional<int>, std::allocator<std::optional<int> > >}]’:
+/usr/include/c++/13/bits/alloc_traits.h:539:21:   required from ‘static constexpr void std::allocator_traits<std::allocator<_Up> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Args = {std::vector<std::optional<int>, std::allocator<std::optional<int> > >}; _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; allocator_type = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >]’
+/usr/include/c++/13/bits/stl_uninitialized.h:1078:26:   required from ‘constexpr void std::__relocate_object_a(_Tp*, _Up*, _Allocator&) [with _Tp = vector<optional<int>, allocator<optional<int> > >; _Up = vector<optional<int>, allocator<optional<int> > >; _Allocator = allocator<vector<optional<int>, allocator<optional<int> > > >]’
+/usr/include/c++/13/bits/stl_uninitialized.h:1106:26:   required from ‘constexpr _ForwardIterator std::__relocate_a_1(_InputIterator, _InputIterator, _ForwardIterator, _Allocator&) [with _InputIterator = vector<optional<int>, allocator<optional<int> > >*; _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Allocator = allocator<vector<optional<int>, allocator<optional<int> > > >]’
+/usr/include/c++/13/bits/stl_uninitialized.h:1148:33:   required from ‘constexpr _ForwardIterator std::__relocate_a(_InputIterator, _InputIterator, _ForwardIterator, _Allocator&) [with _InputIterator = vector<optional<int>, allocator<optional<int> > >*; _ForwardIterator = vector<optional<int>, allocator<optional<int> > >*; _Allocator = allocator<vector<optional<int>, allocator<optional<int> > > >]’
+/usr/include/c++/13/bits/stl_vector.h:506:26:   required from ‘static constexpr std::vector<_Tp, _Alloc>::pointer std::vector<_Tp, _Alloc>::_S_relocate(pointer, pointer, pointer, _Tp_alloc_type&) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; pointer = std::vector<std::optional<int>, std::allocator<std::optional<int> > >*; _Tp_alloc_type = std::vector<std::vector<std::optional<int>, std::allocator<std::optional<int> > >, std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > > >::_Tp_alloc_type]’
+/usr/include/c++/13/bits/vector.tcc:676:16:   required from ‘constexpr void std::vector<_Tp, _Alloc>::_M_default_append(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+/usr/include/c++/13/bits/stl_vector.h:1013:4:   required from ‘constexpr void std::vector<_Tp, _Alloc>::resize(size_type) [with _Tp = std::vector<std::optional<int>, std::allocator<std::optional<int> > >; _Alloc = std::allocator<std::vector<std::optional<int>, std::allocator<std::optional<int> > > >; size_type = long unsigned int]’
+grid.cc:60:19:   required from ‘Grid@grid<T>::Grid(size_t, size_t) [with T = int; size_t = long unsigned int]’
+main.cpp:25:20:   required from here
+/usr/include/c++/13/bits/stl_construct.h:96:17: 错误：对‘operator new(sizetype, void*)’的调用没有匹配的函数
+   96 |     -> decltype(::new((void*)0) _Tp(std::declval<_Args>()...))
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/13/new:126:26: 附注：candidate: ‘void* operator new(std::size_t)’
+  126 | _GLIBCXX_NODISCARD void* operator new(std::size_t) _GLIBCXX_THROW (std::bad_alloc)
+      |                          ^~~~~~~~
+/usr/include/c++/13/new:126:26: 附注： 备选需要 1 实参，但提供了 2 个
+/usr/include/c++/13/new:149:26: 附注：candidate: ‘void* operator new(std::size_t, std::align_val_t)’
+  149 | _GLIBCXX_NODISCARD void* operator new(std::size_t, std::align_val_t)
+      |                          ^~~~~~~~
+/usr/include/c++/13/new:149:26: 附注：  no known conversion for argument 2 from ‘void*’ to ‘std::align_val_t’
+main.cpp:2:8: 警告：not writing module ‘main’ due to errors
+    2 | export module main;
+      |        ^~~~~~

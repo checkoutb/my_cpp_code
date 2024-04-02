@@ -1,0 +1,11 @@
+In module /usr/include/c++/13/format, imported at grid.cc:10,
+of module grid, imported at main.cpp:4:
+/usr/include/c++/13/format: In instantiation of ‘class std::basic_format_arg<std::basic_format_context<std::__format::_Sink_iter<char>, char> >’:
+/usr/include/c++/13/format:3617:8:   required from ‘constexpr void std::__format::_Formatting_scanner<_Out, _CharT>::_M_format_arg(std::size_t) [with _Out = std::__format::_Sink_iter<char>; _CharT = char; std::size_t = long unsigned int]’
+/usr/include/c++/13/format:3614:7:   required from here
+/usr/include/c++/13/format:2817:11: 编译器内部错误：段错误
+ 2817 |     class _Arg_store;
+      |           ^~~~~~~~~~
+Please submit a full bug report, with preprocessed source.
+参阅 <http://bugzilla.redhat.com/bugzilla> 以获取指示。
+预处理后的源码储存于文件 /tmp/ccaiOeqc.out，请将其附在错误报告内。

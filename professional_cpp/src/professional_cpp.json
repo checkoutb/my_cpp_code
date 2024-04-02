@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Description": "professional_cpp",
+        "Id": "professional_cpp",
+        "Name": "professional_cpp"
+    },
+    "X-KDevelop-Category": "Global",
+    "X-KDevelop-Mode": "GUI"
+}
