@@ -8,8 +8,8 @@ namespace CurrentThread
     {
         if (t_cachedTid == 0)
         {
-            t_cachedTid = static_cast<pid_t>(::syscall(SYS_gettid));        // zzz system call
-                                                // 为什么转成 pid_t 然后 赋给 int ？
+            t_cachedTid = static_cast<pid_t>(::syscall(SYS_gettid));    // zzz system call
+                        // pid_t 是 int 的别名
         }
     }
 }

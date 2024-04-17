@@ -43,7 +43,8 @@ void HttpServer::onConnection(const TcpConnectionPtr& conn)
 
 void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp receiveTime)
 {
-    std::unique_ptr<HttpContext> context(new HttpContext);  // zzz new 不加 ()，不会初始化，即使是 基本类型， 也是随即值。
+    std::unique_ptr<HttpContext> context(new HttpContext);  // zzz new 不加 ()，不会初始化，即使是 基本类型， 也是随即值。。
+                // 不，这个是 默认初始化，对于 类/struct/union 是调用 默认构造器， 对于 数组，标量， 就是 不确定的值。
 
 #if 0   // false
     std::string request = buf->getBufferAsString();
@@ -71,7 +72,7 @@ void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& req)
 
     bool close = connection == "close" || (req.getVersion() == HttpRequest::Http10 && connection != "Keep-Alive");
 
-    close = true;
+    close = true;       // zzz  没有用到上面的 判断。。
 
     HttpResponse response(close);
 
