@@ -37,3 +37,5 @@ gcm.cache/
 build/
 *.kdev4
 *.ignore
+benchmark-1.8.3/
+

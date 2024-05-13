@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.20)
 
 project(myserver)
 
+# find_package(glog 0.7.0 REQUIRED)
+# target_link_libraries(myserver glog::glog)
+
 set(SRC_LIST main/main.cpp)
 
 # 必须在 add_executable 之上，且 名字 必须放到 add_executable 中
@@ -12,6 +15,17 @@ aux_source_directory(net SRC_LIST)
 aux_source_directory(thread SRC_LIST)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${SRC_LIST2})
+
+
+# find_package(glog 0.7.0 REQUIRED)
+# target_link_libraries(myserver PRIVATE glog::glog)
+
+find_package(glog 0.7.0 REQUIRED)
+target_link_libraries(myserver PRIVATE glog::glog)
+
+find_package(gflags 0.7.0 REQUIRED)
+target_link_libraries(myserver PRIVATE gflags::gflags)
+
 
 # target_include_directories(myserver PUBLIC ${PROJECT_SOURCE_DIR}/include)
 

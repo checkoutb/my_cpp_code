@@ -6,6 +6,8 @@
 #include "../include/http_context.h"
 #include "../include/timestamp.h"
 
+#include "glog/logging.h"
+#include "glog/flags.h"
 
 extern char favicon[555];
 bool benchmark = false;
@@ -61,6 +63,14 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
 // 原方法在 /src/http/main.cc 中
 int main(int argc, char **argv)
 {
+    // https://github.com/google/glog/blob/master/src/glog/flags.h
+    FLAGS_log_dir = "log33";  // 自定义日志文件位置，这个文件夹需要手动创建好，这行要在 InitGoogleLogging 之前。  // `./myserver` 运行程序的，所以这个 文件夹是 {project_root}/build/log33
+    google::InitGoogleLogging(argv[0]);
+    int a = 123;
+    LOG(INFO) << "FIND " << a << " in glog";
+    // 默认 /tmp/myserver.192.xxxxxxxxxx
+    // 有buffer，所以可能关闭后才有，有个 logbuflevel 配置。
+
     EventLoop loop;
     HttpServer server(&loop, InetAddress(8080), "http_server");
     server.setHttpCallback(onRequest);

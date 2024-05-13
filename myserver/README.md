@@ -1,9 +1,14 @@
 
 
 在build目录下
-`cmake --build .`
-`make`
+`cmake ..`
+`cmake --build .` or `make`
 `./myserver`
+
+delete /build, mkdir build, cd build
+`cmake .. -DCMAKE_TOOLCHAIN_FILE={your_path_______}/vcpkg/scripts/buildsystems/vcpkg.cmake`
+`make`
+
 
 
 
@@ -621,6 +626,444 @@ http://kegel.com/c10k.html
 
 设置参数
 https://blog.csdn.net/zhiyuan2021/article/details/128882636
+
+
+# vcpkg
+
+https://github.com/microsoft/vcpkg/blob/master/README_zh_CN.md#%E5%AE%89%E8%A3%85-linux-developer-tools
+
+
+哈哈，想偷懒 没偷到。
+```text
+$ vcpkg
+bash: vcpkg: 未找到命令...
+安装软件包“vcpkg”以提供命令“vcpkg”？ [N/y] y
+
+ * 正在队列中等待...
+ * 正在载入软件包列表。... 安装软件包失败: Multiple matches of vcpkg;2023.06.22-3.fc39;x86_64;fedora
+```
+
+sudo 后
+`dnf install vcpkg`
+这里没有说 多个匹配。
+
+只有上面一条，没有 那种 dnf update 的语句( 不知道有没有这种语句)
+
+```text
+已安装:
+  aria2-1.37.0-3.fc39.x86_64           vcpkg-2024.03.14-1.fc39.x86_64
+```
+
+---
+
+```text
+$ vcpkg install glog
+current_path("/home/xxxx/.local/share/vcpkg"): No such file or directory
+```
+。。本来不想这里的，但是这里应该更好吧， 而且我也不知道怎么改。估计改 property
+
+```text
+$ vcpkg install glog
+error: Invalid triplet: x64-linux
+Built-in Triplets:
+Community Triplets:
+```
+。。在 share文件夹下 建立 vcpkg 后， invalid triplet
+
+
+`vcpkg help triplet`
+
+```text
+$ vcpkg help triplet
+Built-in Triplets:
+Community Triplets:
+```
+有种 完蛋了的感觉，但不应该啊。
+
+```text
+$ vcpkg search glog
+The result may be outdated. Run `git pull` to get the latest results.
+If your port is not listed, please open an issue at and/or consider making a pull request.  -  https://github.com/Microsoft/vcpkg/issues
+```
+
+。。找不到 可以执行git的 文件夹啊， whereis 只能找到一个 文件，找不到 文件夹
+
+
+```text
+$ vcpkg integrate install
+Applied user-wide integration for this vcpkg root.
+CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=/home/xxxx/.local/share/vcpkg/scripts/buildsystems/vcpkg.cmake"
+```
+
+看了下，目前没有这个文件。
+
+
+```text
+已移除:
+  aria2-1.37.0-3.fc39.x86_64           vcpkg-2024.03.14-1.fc39.x86_64
+```
+
+
+这网络是真的无语啊
+看来 上面的 git pull 应该就是指 这个 仓库吧，我看很多文件啊，
+
+```text
+接收对象中: 100% (230376/230376), 68.30 MiB | 9.77 MiB/s, 完成.
+处理 delta 中: 100% (152789/152789), 完成.
+正在更新文件: 100% (11314/11314), 完成.
+```
+
+但是看文件系统中 只有 `13,857 项，共 19.8 MB`
+文件的 ports 10万个文件，看到了 glog， 就是 第三方库的 索引也在这个仓库了，
+
+所以 dnf install vcpkg ,安装了个 什么东西。。。
+
+
+```text
+$ ./bootstrap-vcpkg.sh
+Downloading vcpkg-glibc...
+vcpkg package management program version 2024-04-23-d6945642ee5c3076addd1a42c331bbf4cfc97457
+```
+
+
+```text
+$ ./vcpkg install glog
+Computing installation plan...
+A suitable version of cmake was not found (required v3.29.2) Downloading portable cmake 3.29.2...
+Downloading cmake...
+```
+这版本怎么这么高。。 最新的就是 3.29.2
+
+
+```text
+sudo dnf remove cmake
+
+ 软件包                     架构    版本                        仓库       大小
+================================================================================
+移除:
+ cmake                      x86_64  3.27.7-1.fc39               @fedora    31 M
+移除依赖的软件包:
+ kdevelop                   x86_64  9:23.08.1-1.fc39            @fedora    16 M
+清除未被使用的依赖关系:
+ aspell                     x86_64  12:0.60.8-12.fc39           @fedora   3.2 M
+ aspell-en                  x86_64  50:2020.12.07-8.fc39
+......
+
+事务概要
+================================================================================
+移除  116 软件包
+
+将会释放空间：954 M
+确定吗？[y/N]：
+```
+
+wocao, 我的 kDevelop ...
+
+`sudo dnf update cmake`  dnf上是最新的了。 `cmake version 3.27.7`
+
+那没办法了，看 vcpkg 的表演了。
+
+
+41.4
+
+```
+whereis cmake
+cmake: /usr/bin/cmake /usr/lib64/cmake /usr/local/lib/cmake /usr/share/cmake /usr/share/man/man1/cmake.1.gz
+```
+
+CMake 3.29.2 available for download April 11, 2024
+
+
+vcpkg 这么激进吗, 今天4-27。  不过 git版本回退应该就好了
+
+```text
+$ ./vcpkg install glog
+Computing installation plan...
+A suitable version of cmake was not found (required v3.29.2) Downloading portable cmake 3.29.2...
+Downloading cmake...
+https://github.com/Kitware/CMake/releases/download/v3.29.2/cmake-3.29.2-linux-x86_64.tar.gz->/run/media/vcpkg/downloads/cmake-3.29.2-linux-x86_64.tar.gz
+```
+
+版本回退下， 最近的tag 是 2024-3-25 的
+
+退到 2024.03.25 可以。 没有要求 更新 cmake
+
+刚才，想多退一些，所以退到了 2024.01.12 上， 然后 下 glog，发现 是 0.6.0 的。  然后 网络 git 连不上,，所以 ctrl+c, 版本 还原到 2024.03.25 了， 2024.03.25 的是 0.7.0 的，
+
+看了下
+glog， 2022-4-5, 0.6.0 ，  2024-1-10,0.7.0-rc,  2024-02-18,0.7.0
+spqlog 半年左右 (4-8个月 一版)， 前2天 刚发了一版。。
+
+
+```text
+CMake Error at scripts/cmake/vcpkg_download_distfile.cmake:32 (message):
+
+      Failed to download file with error: 1
+```
+
+
+
+```text
+service fastgithub start
+
+export https_proxy=http://127.0.0.1:38457
+export http_proxy=http://127.0.0.1:38457      // 是的 都是 http://
+
+./vcpkg install glog
+
+```
+
+ok
+```text
+Total install time: 1.3 min
+glog provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glog CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glog::glog)
+```
+
+`"-DCMAKE_TOOLCHAIN_FILE=/run/media/vcpkg/scripts/buildsystems/vcpkg.cmake"`
+
+
+
+`cmake .. -DCMAKE_TOOLCHAIN_FILE=/run/media/vcpkg/scripts/buildsystems/vcpkg.cmake`
+
+
+试了半天，cmake的缓存'建功'了， 删了 build/ 就可以了。
+
+看到的错误就是，cmake直接说 glog不存在， 没有任何 vcpkg 的信息。 就是因为 之前build了，cmake 已经缓存了之前的东西 吧？
+就是下面的错误，下面的错误是 `cmake .. -DCMAKE_TOOLCHAIN_FILE=xxxx/vcpkg.cmake` 命令的 返回
+里面和 vcpkg 毫无关系。 就是 走的 缓存
+```text
+CMake Error at CMakeLists.txt:23 (find_package):
+  By not providing "Findglog.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "glog", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "glog" (requested
+  version 0.7.0) with any of the following names:
+
+    glogConfig.cmake
+    glog-config.cmake
+
+  Add the installation prefix of "glog" to CMAKE_PREFIX_PATH or set
+  "glog_DIR" to a directory containing one of the above files.  If "glog"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+```
+
+
+`vcpkg.json`  这个没有的话， vcpkg 会报错， 报错很明显
+```json
+{
+  "dependencies": [
+    "glog"
+  ]
+}
+```
+
+
+# glog
+
+main/main.cpp 的 main方法中
+```C++
+    // https://github.com/google/glog/blob/master/src/glog/flags.h
+    FLAGS_log_dir = "log33";  // 自定义日志文件位置，这个文件夹需要手动创建好，这行要在 InitGoogleLogging 之前。
+                // `./myserver` 运行程序的，所以这个 文件夹是 {project_root}/build/log33
+                // 默认位置： /tmp/myserver.192.xxxxxxxxxx
+    google::InitGoogleLogging(argv[0]);
+    int a = 123;
+    LOG(INFO) << "FIND " << a << " in glog";
+
+```
+
+## 日志等级
+。。没有debug，有点意外。
+
+```C++
+// https://github.com/google/glog/blob/master/src/glog/log_severity.h
+
+enum LogSeverity {
+  GLOG_INFO = 0,
+  GLOG_WARNING = 1,
+  GLOG_ERROR = 2,
+  GLOG_FATAL = 3,
+#ifndef GLOG_NO_ABBREVIATED_SEVERITIES
+#  ifdef ERROR
+#  error ERROR macro is defined. Define GLOG_NO_ABBREVIATED_SEVERITIES before including logging.h. See the document for detail.
+#  endif
+  INFO = GLOG_INFO,
+  WARNING = GLOG_WARNING,
+  ERROR = GLOG_ERROR,
+  FATAL = GLOG_FATAL
+#endif
+};
+```
+
+
+
+## config
+
+https://github.com/google/glog/blob/master/src/glog/flags.h
+
+DECLARE_类型
+
+但是不知道默认值是多少，但是应该够用，不至于很离谱。就是开箱即用。
+默认值： https://github.com/google/glog/blob/master/src/flags.cc   应该看这个文件。 .h 只有声明，这里有 声明+默认值+描述
+
+
+- DECLARE_int32(logemaillevel);
+  email发送 大于等于这个级别的日志
+  默认 999 。。。
+
+- DECLARE_int32(logcleansecs);
+  每隔多久清除逾期(overdue)日志
+  默认 60*5 sec，  即5分钟。
+  。。所以有下面的 linux 可以立刻驱逐。
+
+- DECLARE_bool(drop_log_memory);
+  linux专用
+  大意是：一旦写入到磁盘，就立刻从内存驱逐出去，因为我们不可能再去读取它，并且日志增长可能很快，所以要立刻驱逐
+  默认true
+
+- DECLARE_string(alsologtoemail);
+  发送到 这些email地址 + logfile
+  默认：""
+
+- DECLARE_string(log_backtrace_at);
+  Emit a backtrace when logging at file:linenum.
+  默认 ""
+
+- DECLARE_bool(timestamp_in_logfile_name);
+  文件名是否带时间戳
+  。。不带时间戳，同名文件，append
+  默认：BoolFromEnv("GOOGLE_TIMESTAMP_IN_LOGFILE_NAME", true)
+
+- DECLARE_bool(logtostdout);
+  日志输出到stdout，而不是logfile
+  BoolFromEnv("GOOGLE_LOGTOSTDOUT", false)
+
+- DECLARE_bool(colorlogtostdout);
+  输出到stdout的日志着色
+  false
+
+- DECLARE_bool(logtostderr);
+  日志输出到stderr，而不是logfile
+  BoolFromEnv("GOOGLE_LOGTOSTDERR", false)
+
+- DECLARE_bool(alsologtostderr);
+  日志输出到stderr 和 logfile
+  BoolFromEnv("GOOGLE_ALSOLOGTOSTDERR", false)
+
+- DECLARE_bool(colorlogtostderr);
+  输出到stderr时着色
+  false
+
+- DECLARE_int32(stderrthreshold);
+  **int32**
+  日志级别>=该设置的，发送到stderr 和 logfile
+  默认：google::GLOG_ERROR
+  。。所以Error级别的会 stderr + logfile
+
+- DECLARE_bool(log_file_header);
+  创建文件时是否增加log file header
+  。。应该就是指下面的(在日志文件的头几行)
+  ```text
+  Log file created at: 2024/04/28 09:44:07
+  Running on machine: 192.168.1.5
+  Running duration (h:mm:ss): 0:00:00
+  Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+  ```
+  默认 true
+
+- DECLARE_bool(log_prefix);
+  每行输出是否带上日志前缀(指 时间，线程，文件名，文件行)
+  true
+
+- DECLARE_bool(log_year_in_prefix);
+  日志前缀是否包含年
+  true
+
+- DECLARE_int32(logbuflevel);
+  日志级别小于等于这个的buffer，大于这个的立刻flush
+  默认 0 ; (-1:不buffer，0 是info，所以buffer了info)
+
+- DECLARE_int32(logbufsecs);
+  可以buffer多久，就是buffer中有日志后，多久flush一次
+  默认 30 sec
+
+- DECLARE_int32(minloglevel);
+  低于这个等级的日志不会输出
+  默认 0
+
+- DECLARE_string(log_dir);
+  日志目录
+  执行 DefaultLogDir() 方法，里面从 env中搜索 "GOOGLE_LOG_DIR", "TEST_TMPDIR"。没有的话，怎么使用/tmp 的不清楚。
+
+- DECLARE_int32(logfile_mode);
+  设置日志文件模式/权限
+  默认: 0664
+
+- DECLARE_string(log_link);
+// Sets the path of the directory into which to put additional links
+// to the log files.
+  应该就是指 `myserver.INFO`，默认是和logfile一起的，我修改了 log_dir 后，myserver.INFO也自动变更了。它是一个link，指向了最后的日志文件。
+  默认 ""
+
+- DECLARE_int32(v);  // in vlog_is_on.cc
+  Show all VLOG(m) messages for m <= this. Overridable by --vmodule.
+  默认 0
+
+- DECLARE_string(vmodule);  // also in vlog_is_on.cc
+  ```text
+  "per-module verbose level."
+  " Argument is a comma-separated list of <module name>=<log level>."
+  " <module name> is a glob pattern, matched against the filename base"
+  " (that is, name ignoring .cc/.h./-inl.h)."
+  " <log level> overrides any value given by --v.")
+  ```
+  默认 ""
+
+- DECLARE_uint32(max_log_size);
+  日志文件最大大小 MB
+  默认 1800,  所以 1.8g
+
+- DECLARE_bool(stop_logging_if_full_disk);
+  磁盘满了，是否停止向磁盘输出日志
+  默认 false
+
+- DECLARE_bool(log_utc_time);
+  是否使用UTC时间
+  。。glog怎么获得当前时区的？
+  默认 false
+
+- DECLARE_string(logmailer);
+  mailer
+  应该是指邮件服务器
+  默认 ""
+
+- DECLARE_bool(symbolize_stacktrace);
+  应该是：栈展开时，打印符号(就是方法名)，不然只有方法地址，没有方法名
+  默认 true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
