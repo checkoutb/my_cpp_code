@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+// option java_xx ?   i don't think i need any option.
+
+package mymsgpkg;
+
+service MyHiService {
+  rpc SendHi(HiRequest) returns (HiResponse) {}  // function name must begin with Uppercase?
+  rpc SendHi2(HiRequest) returns (HiResponse) {}
+}
+
+message HiRequest {
+  string req = 1;
+}
+
+message HiResponse {
+  string resp = 1;
+}
+

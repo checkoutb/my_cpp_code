@@ -31,7 +31,10 @@ int main()
 my_cpp_code/any/static_dynamic_lib$ g++ -c plus.cpp
 my_cpp_code/any/static_dynamic_lib$ ls
 api.h  main.cpp  minus.cpp  plus.cpp  plus.o
+
 my_cpp_code/any/static_dynamic_lib$ g++ -c minus.cpp -o minus.o
+        // header文件被移动后 要 `g++ -c minus.cpp -I header/`
+
 my_cpp_code/any/static_dynamic_lib$ ls
 api.h  main.cpp  minus.cpp  minus.o  plus.cpp  plus.o
 my_cpp_code/any/static_dynamic_lib$ ar rcs libapi.a minus.o plus.o
@@ -139,6 +142,13 @@ my_cpp_code/any/static_dynamic_lib$ tree
 `-fPIC`: 生成地址无关的代码，装载时定位
 
 my_cpp_code/any/static_dynamic_lib$ g++ -shared -fPIC -o libdapi.so plus.o minus.o
+。。这个可以 从 .cpp 文件开始，而不是 从.o， .cpp 更好
+如果有全局变量的话，直接用 .o 会导致 报错： relocation xx  。。在 外面的 load_lib_at_runtime 中遇到了这个问题。 从 cpp开始就没有问题。
+..但是这里，我在 plus.cpp 中 增加 全局变量， 没有问题啊。 可以 从 .o 生成。
+。复现了，确实 不行。 有全局变量，且 在方法中 使用了 这个全局变量， 生成 .o 后 这里就会失败。
+.. 也给出提示了 `recompile with -fPIC`  在生成 .o 的命令中 带上 -fPIC, 确实可以。  -fPIC ..知道了。
+
+
 
 my_cpp_code/any/static_dynamic_lib$ g++ main.cpp -o dmain -L dlib/ -l dapi -I header/
 

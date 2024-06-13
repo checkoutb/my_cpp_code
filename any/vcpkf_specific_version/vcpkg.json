@@ -1,0 +1,16 @@
+{
+  "dependencies": [
+    {
+      "name": "fmt",
+      "version>=": "10.0.0"
+    },
+    "zlib"
+  ],
+    "builtin-baseline": "a34c873a9717a888f58dc05268dea15592c2f0ff",
+    "overrides": [
+        {
+            "name": "zlib",
+            "version": "1.3"
+        }
+    ]
+}
