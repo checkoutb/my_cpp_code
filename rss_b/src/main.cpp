@@ -15,6 +15,7 @@
 
 #include <mysql-cppconn/mysqlx/xdevapi.h> // /usr/include/mysql-cppconn/mysqlx/
 
+#include <unistd.h>
 
 // #include <cstdint>
 // #include <cassert>
@@ -67,12 +68,17 @@ std::optional<std::string> getRSS(std::string server, std::string url_path) {
 
 }
 
+namespace rss_mysql {
+    std::string time_point_2_string(std::chrono::system_clock::time_point&);
+}
+
 namespace rss_timer {
 
 using namespace std::chrono;
 
 void sleep_to_next_hour() {
     time_point now2 = system_clock::now();
+    std::cout<<getpid()<<" now is: "<<rss_mysql::time_point_2_string(now2)<<" ";
     time_point next = std::chrono::round<std::chrono::hours>(now2 + std::chrono::hours(1)) + std::chrono::seconds(5);
     seconds snds = duration_cast<seconds>(next - now2);
     std::cout<<"will sleep seconds: "<<snds.count()<<std::endl;
@@ -137,9 +143,6 @@ std::chrono::system_clock::time_point mysqlx_column_2_time_point(const mysqlx::V
     std::chrono::system_clock::time_point tp = std::chrono::system_clock::from_time_t(tt);
     return tp;
 }
-
-
-
 
 const int MAX_GAP = 7 * 24;
 class RssSource {
@@ -276,18 +279,19 @@ std::set<std::string> get_latest_links(int sourceid, int count) {
 class RssItem {
 public:
 
-    RssItem(int sourceid, std::string title, std::string link): id(id), sourceid(sourceid), title(title), link(link) {
+    RssItem(int sourceid, std::string title, std::string link, std::string pubdate): id(id), sourceid(sourceid), title(title), link(link), pubdate(pubdate) {
 
     }
 
     int insert_2_db() {
         mysqlx::Session session("localhost", 33060, "root", rss_secret::mysql_pwd);
-        std::string insert_sql = "insert into rss.rss_item (sourceid,title,link) values (" + std::to_string(sourceid) + ",'" + title + "','" + link + "');";
+        std::string insert_sql = "insert into rss.rss_item (sourceid,title,link,pubdate) values (" + std::to_string(sourceid) + ",'" + title + "','" + link + "','" + pubdate + "');";
 
         std::cout<<insert_sql<<std::endl;
 
         mysqlx::SqlResult result = session.sql(insert_sql).execute();
 
+        // insert 后 select，并发时会有问题。 需要事务。
         std::string query_sql = "select max(id) from rss.rss_item where link='" + link + "'";
 
         result = session.sql(query_sql).execute();
@@ -313,6 +317,7 @@ private:
     int sourceid; // RssSource id
     std::string title;
     std::string link;
+    std::string pubdate; // pubDate published
     system_clock::time_point createtime;
 };
 
@@ -356,7 +361,7 @@ namespace rss_xml {
 class RssEntry {
 public:
 
-    RssEntry(std::string title, std::string link, std::string desc): title{title}, link{link}, description{desc} {
+    RssEntry(std::string title, std::string link, std::string desc, std::string pubdate): title{title}, link{link}, description{desc}, pubdate(pubdate) {
 
     }
 
@@ -372,10 +377,15 @@ public:
         return description;
     }
 
+    std::string get_pubdate() {
+        return pubdate;
+    }
+
 private:
     std::string title;
     std::string link;
     std::string description;
+    std::string pubdate;
 };
 
 std::vector<RssEntry> convert(std::string& xmlstr) {
@@ -394,7 +404,7 @@ std::vector<RssEntry> convert(std::string& xmlstr) {
             std::cout<<node.child("link").attribute("href").value()<<std::endl;
 
             node.child("content").print(ss, "");
-            vre.emplace_back(RssEntry(node.child("title").child_value(), node.child("link").attribute("href").value(), ss.str()));
+            vre.emplace_back(RssEntry(node.child("title").child_value(), node.child("link").attribute("href").value(), ss.str(), node.child("published").child_value()));
 
             ss.str("");
         }
@@ -404,7 +414,7 @@ std::vector<RssEntry> convert(std::string& xmlstr) {
             // std::cout<<node.child("title").child_value()<<std::endl;
             std::cout<<node.child("link").child_value()<<std::endl;
             // std::cout<<std::string(node.child("description").child_value()).substr(0, 50)<<std::endl;
-            vre.emplace_back(RssEntry(node.child("title").child_value(), node.child("link").child_value(), node.child("description").child_value()));
+            vre.emplace_back(RssEntry(node.child("title").child_value(), node.child("link").child_value(), node.child("description").child_value(), node.child("pubDate").child_value()));
         }
     }
 
@@ -462,13 +472,17 @@ int main() {
                 }
                 std::cout<<"start to deal "<<j<<std::endl;
                 // 新的文章
-                hasNew = true;
-                rss_mysql::RssItem item = rss_mysql::RssItem(rss.get_id(), vre[j].get_title(), vre[j].get_link());
-                int itemid = item.insert_2_db(); // begin transaction, insert mysql, insert mongodb, commit
-
-                rss_mongodb::RssMongo rssmongo(itemid, vre[j].get_title(), vre[j].get_link(), vre[j].get_description());
-                rssmongo.insert_2_mongo();
+                rss_mysql::RssItem item = rss_mysql::RssItem(rss.get_id(), vre[j].get_title(), vre[j].get_link(), vre[j].get_pubdate());
+                try {
+                    int itemid = item.insert_2_db(); // begin transaction, insert mysql, insert mongodb, commit
+                    rss_mongodb::RssMongo rssmongo(itemid, vre[j].get_title(), vre[j].get_link(), vre[j].get_description());
+                    rssmongo.insert_2_mongo();
+                    hasNew = true;
+                } catch (const mysqlx::Error& err) {
+                    std::cout<<"ERROR insert into db. "<<err<<std::endl;
+                }
             }
+            
             rss.update_2_db(true, hasNew);
         }
         rss_timer::sleep_to_next_hour();

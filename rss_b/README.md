@@ -1,16 +1,18 @@
 
 RSS backend
 
+C++17
+
 
 # 从0开始的一些记录
 
-不知道前端显示用什么好，估计会浏览器。毕竟不会qt。而且要手写一个编辑器，也挺难的。  
-而且浏览器本身就支持 `<html>`， 不需要自己根据标签来转换成普通文本
+不知道前端显示用什么好，估计会浏览器。毕竟不会qt。而且要手写一个编辑器，也挺难的。   
+而且浏览器本身就支持 `<html>`， 不需要自己根据标签来转换成普通文本 
 
 应该会保存到数据库中，或者有什么文件，啊 nosql。知道 MongoDB 是用来保存文档的，不知道有没有其他的选择。  
 关系型数据库挺麻烦的，不如直接保存到nosql中。 没用过MongoDB。
 
-文件用 MongoDB  
+文件用 MongoDB   
 RSS的地址，上次查看时间，这些还是要 MySQL的。
 
 ---
@@ -60,11 +62,11 @@ xml库
 
 ## xml parser
 
-boost 没有 xml啊，
-https://www.boost.org/doc/libs/1_84_0/  这里全文搜索 xml，没有。  json，http 是有的。
-后续搜索的时候，发现 Property Tree 可以处理 xml 。 但估计不好用吧。
+boost 没有 xml啊，  
+https://www.boost.org/doc/libs/1_84_0/  这里全文搜索 xml，没有。  json，http 是有的。  
+后续搜索的时候，发现 Property Tree 可以处理 xml 。 但估计不好用吧。  
 
-folly 也没有， 没有 http，json， 感觉里面的东西 更加 底层一些，没有 到库的级别。 更像 stl 的 扩展。 对，其他文章也有说， 是 标准库的补充。
+folly 也没有， 没有 http，json， 感觉里面的东西 更加 底层一些，没有 到库的级别。 更像 stl 的 扩展。 对，其他文章也有说， 是 标准库的补充。  
 https://github.com/facebook/folly/blob/main/folly/docs/Overview.md
 
 
@@ -76,11 +78,11 @@ https://github.com/facebook/folly/blob/main/folly/docs/Overview.md
 - libxml2
 
 
-pugixml  或  tinyxml
+pugixml  或  tinyxml   
 release 的 source code.tar.gz     tinyxml2-10.0.0 627k,  pugixml-1.14.0 563k
 
-tinyxml 正好是一个大版本。 不过 是2023-12-31 发布的， 有问题 应该也已经修复了吧。
-tinyxml 的issue 有100+个，  pugixml 的 10+个
+tinyxml 正好是一个大版本。 不过 是2023-12-31 发布的， 有问题 应该也已经修复了吧。  
+tinyxml 的issue 有100+个，  pugixml 的 10+个  
 
 
 https://blog.csdn.net/weixin_43679037/article/details/127268573
@@ -96,6 +98,7 @@ rapidxml 也很快。可惜了，2013 。 不过， xml 没有什么改变   ，
 还要看下 vcpkg 行不行
 tiny-xml 可以，  pugi 没有提到， 当然可以直接 github依赖，但要指定版本。
 
+最后直接 源文件复制进来。没有用vcpkg
 
 
 
@@ -143,8 +146,8 @@ boost 有 timer
 文档数据库是 直接对 文档中内容 进行 搜索，查询 的。  我只是需要一个 可变长 string。
 
 https://www.zhihu.com/question/408729025
-频繁读不频繁写的新闻资讯类文本，在保存的时候，直接写成静态的html，访问的时候直接从nginx返回
-OSS
+频繁读不频繁写的新闻资讯类文本，在保存的时候，直接写成静态的html，访问的时候直接从nginx返回  
+OSS  
 
 确实，直接文件就完事了，不需要数据库啊。 在mysql中记录下 路径就可以了。  还需要一些 总结/摘要 (前100个字)
 
@@ -164,7 +167,7 @@ OSS
 
 # 代码
 
-目前先 一整个文件: main.cpp
+目前先 一整个文件: main.cpp   
 多个命名空间，后期再看情况，是否把 命名空间 移出为单独的文件。
 
 。。那分为那些 namespace 呢？ 要拆分方法，肯定要先定义好 namesapce。
@@ -175,14 +178,17 @@ OSS
 - 其他逻辑全 main中， 现在想到的就是 连续有新数据，就加大频率, 还有错误处理
 
 
-httplib 只需要一个文件就可以了。 就不需要 vcpkg 了？
+httplib 只需要一个文件就可以了。 就不需要 vcpkg 了？  
 嗯。 不要了，懒得写
 
 
 是否需要一个 schedule_job表， 来保存每次 定时任务的 情况
 
 
-2038放弃了，直接 timestmap 再说。 不再对外部提供 具体的时间， 只提供一个 修改功能，就是 改成 now + 多少小时
+2038( 就是mysql如何解决 timestamp 2038年 溢出) 放弃了，直接 timestmap 再说。  
+不再对外部提供 具体的时间， 只提供一个 修改功能，就是 改成 now + 多少小时。 这样以后 里面可以 换 时间为 datetime之类的， 外面不需要改。
+
+
 
 
 
@@ -194,13 +200,12 @@ cpp-httplib 的 版本： commitid： 0b657d2， 2024-6-15 的
 
 `sudo dnf install openssl-devel`
 
-我还以为 直接 源文件可以简单很多，结果 还是很多 错，链接时报错。
-SSL support is available with CPPHTTPLIB_OPENSSL_SUPPORT. **libssl and libcrypto** should be linked.
-没有注意到
+我还以为 直接 源文件可以简单很多，结果 还是很多 错，链接时报错。   
+SSL support is available with CPPHTTPLIB_OPENSSL_SUPPORT. **libssl and libcrypto** should be linked.   
+没有注意到  
 
-`g++ main.cpp -lssl -lcrypto`
-
-cmake 的 增加 这2个依赖。 忘记 怎么加了。
+`g++ main.cpp -lssl -lcrypto`  
+cmake 的 增加 这2个依赖。 忘记 怎么加了。  
 
 
 ## timer
@@ -210,7 +215,7 @@ cmake 的 增加 这2个依赖。 忘记 怎么加了。
 
 退一步就是，  定时器启动， 遍历所有 server，判断是否需要下载。
 
-不如直接把  下次执行时间 保存到 数据库， 然后 数据库就 选择那些 下次执行时间 小于 now 的， 不是 拿取全部，然后 剔除。  而是 拿到的 就是 所有要执行的。   所以 增加一列。   而且 最好是 每个整点 执行 ，这样自己心里也有点数
+不如直接把  下次执行时间 保存到 数据库， 然后 数据库就 选择那些 下次执行时间 小于 now 的， 不是 拿取全部，然后 剔除。  而是 拿到的 就是 所有要执行的。   所以 增加一列。   而且 最好是 每个整点 执行 ，这样自己心里也有点数  
 可以的，  
 启动的时候， 是直接 访问rss，还是 计算下sleep多久才到下一个整点，然后 sleep，   感觉 要直接访问，  启动的时候 肯定是 有时间的。
 
@@ -222,7 +227,7 @@ cmake 的 增加 这2个依赖。 忘记 怎么加了。
 
 ## nosql
 
-到 mysql_demo 中 尝试使用 time_t 的时候，才发现， mysql 有 nosql。。
+到 mysql_demo 中 尝试使用 time_t 的时候，才发现， mysql 有 nosql。。  
 但是 mongodb 装都装了。
 
 
@@ -261,10 +266,33 @@ create table rss.rss_item (
 );
 ```
 
+----
+
+rust 增加
+
+rss 源的 人类可以理解的名称
+`alter table rss.rss_source add column name_cn varchar(32) not null;`
+
+列表/大纲 显示时的优先级
+`alter table rss.rss_source add column priority int default 0 not null;`
+
+发布时间
+`alter table rss.rss_item add column pubdate varchar(45) not null default '';`
+
+状态， 删除(标记而已)，已读，星标
+`alter table rss.rss_item add column status int not null default 0;`
+
+
+
+
+
+
+
 
 ----
 
 `insert into rss_source (name,path,status,last_execute,next_execute) values ('https://36kr.com','/feed',0,'2022-2-2 22:22:22', '2022-1-1 11:11:11');`
+这个缺 后添加的 几个字段， 主要是 namc_cn 
 
 
 
@@ -302,25 +330,46 @@ channel -> 多个item -> title, link, description
 
 
 有2种
-一种 `<feed>`  极少。
+一种 `<feed>`  极少。  
 另一种 `<channel>`
 
 
+
+## 去重
+
+最开始是 根据 rss的条目数量 xx， 去数据库搜索 最新的 xx 条数据的 link，放入set， 然后 去重。
+
+后来，想通过 数据库中 最新的 link， 然后 去重， 这个需要 反转 rss的新条目 ( 因为 rss返回的数据 第一条是最新的，也是被最先处理的，所以数据库中id 会小于 rss的第二条数据)，然后插入到数据库，  但是后来发现  有些RSS是10条xx + 20条yy，所以无法用最新的来比。
+
+所以又回到了 set 去重。
+
+又出了问题: 热榜  
+热榜，是会不停随机翻转的，所以可能 之前是热榜，进入了mysql， 然后一段时间后 再次进入热榜，并且 由于 只提取 mysql中最新的 30个，所以 无法去重。
+ 
+直接外面套一个 catch 。  
+大部分的rss 应该都是 按时间的，   所以就不使用： 通过 select 判重。  而是通过 set + mysql的unique 来进行。  
+之前就有 mysql unique约束 ，只不过没有catch ，直接 把 进程崩了。。
+
+https://dev.mysql.com/doc/x-devapi-userguide/en/error-handling.html
 
 
 
 # execute
 
+C++17  `std::chrono::round<std::chrono::hours>(next_execute);`
+
+创建 /var/log/rss/ 路径，并 chmod (我用了777....不改 不知道 行不行)
+
 在 rss_b 目录下 执行下面3条语句
-`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=/mnt/239G/z_other_git/vcpkg/scripts/buildsystems/vcpkg.cmake`
-`cmake --build build`
-`./build/main`
+`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=/mnt/239G/z_other_git/vcpkg/scripts/buildsystems/vcpkg.cmake`  
+`cmake --build build`  
+`./build/main`  
 
 
 
 # service
 
-想装成service。 这样开机自启动。
+想装成service。 这样开机自启动。  
 不行。  退出码 203，  试了一些解决方案，都不行。。
 
 可以把 密码 放到 service 文件的 Environment 中。
