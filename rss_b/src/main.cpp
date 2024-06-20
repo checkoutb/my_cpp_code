@@ -366,6 +366,9 @@ public:
     }
 
     std::string get_title() {
+        if (title.empty()) {
+            return "no title";
+        }
         return this->title;
     }
     
