@@ -74,5 +74,54 @@ ok了
 
 ---
 
+```
+cmake --build <build-tree> -t coverage-calc_test
+cmake --build <build-tree> -t coverage-calc_console_test
+```
+
+
+
+```
+cmake --build <build-tree> -t memcheck-calc_test
+cmake --build <build-tree> -t memcheck-calc_console_test
+```
+
+
+---
+
+https://clang.llvm.org/docs/ClangFormat.html
+可以直接装在 emacs里
+
+
+`sudo dnf install clang-tools-extra` 里面有 clang-format
+`clang-format -version`
+`sudo dnf install lcov`
+`sudo dnf install cppcheck`
+`sudo dnf install valgrind`
+
+
+
+之前根目录下 CMakeLists.txt 中 最后2行的 add test，install 被我注释了。
+导致 -t 没有规则。
+找了半天。
+
+
+
+
+
+
+geninfo: ERROR: no .gcda files found in .
+
+
+
+
+用了 作者的代码，也是 no .gcda ，估计是 工具版本的差异？
+
+要用的话，直接复制 作者的代码吧。 照着写，不行，也不会。
+https://github.com/PacktPublishing/Modern-CMake-for-Cpp
+第12章的 01
+
+
+g
 
 
