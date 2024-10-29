@@ -292,6 +292,7 @@ public:
         mysqlx::SqlResult result = session.sql(insert_sql).execute();
 
         // insert 后 select，并发时会有问题。 需要事务。
+        // 或者使用 link 来搜索
         std::string query_sql = "select max(id) from rss.rss_item where link='" + link + "'";
 
         result = session.sql(query_sql).execute();

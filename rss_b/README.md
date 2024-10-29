@@ -3,6 +3,10 @@ RSS backend
 
 C++17
 
+`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=/mnt/239G/z_other_git/vcpkg/scripts/buildsystems/vcpkg.cmake`  
+`cmake --build build`  
+`./build/main`  
+
 
 # 从0开始的一些记录
 
