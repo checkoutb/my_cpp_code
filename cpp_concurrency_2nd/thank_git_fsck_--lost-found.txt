@@ -1,0 +1,182 @@
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        cpp_concurrency_2nd/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git add .
+warning: LF will be replaced by CRLF in cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.ninja_log.
+The file will have its original line endings in your working directory
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/CMake Overview
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/CMakeWorkspaceSettings.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/ProjectSettings.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/VSWorkspaceState.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cmake.db
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cpp_concurrency_code/FileContentIndex/1daa4b9a-3bbf-4794-b21a-33995dfdfc6a.vsidx
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cpp_concurrency_code/FileContentIndex/3b86d403-b856-4338-b261-fc703eea6035.vsidx
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cpp_concurrency_code/FileContentIndex/4362b91f-fb8d-487d-acf4-3e59c58aa3e3.vsidx
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cpp_concurrency_code/FileContentIndex/87f1c0bd-5359-4fe3-bbb1-e6c03761f074.vsidx
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cpp_concurrency_code/FileContentIndex/read.lock
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/cpp_concurrency_code/v17/.suo
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/.vs/slnx.sqlite
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/CMakeLists.txt
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/CMakePresets.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/CMakeLists.txt
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch3.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch4.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch5.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch6.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch7.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch8.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/ch9.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/cpp_concurrency_code.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/cpp_concurrency_code/cpp_concurrency_code.h
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/query/client-MicrosoftVS/query.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/cache-v2-c09b6637cf9f3104fffc.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/cmakeFiles-v1-5b9d9ac35fe1829d69eb.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/codemodel-v2-60a58c6a2421c265b9dd.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/directory-cpp_concurrency_code-Debug-dd419cfd1337e7183788.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/index-2023-04-08T07-08-40-0997.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/target-cpp_concurrency_code-Debug-fe9cc2b89ee6f1a68863.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.cmake/api/v1/reply/toolchains-v1-c66364ae5460e27ecf50.json
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.ninja_deps
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/.ninja_log
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeCache.txt
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CMakeCCompiler.cmake
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CMakeCXXCompiler.cmake
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CMakeDetermineCompilerABI_C.bin
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CMakeDetermineCompilerABI_CXX.bin
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CMakeRCCompiler.cmake
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CMakeSystem.cmake
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CompilerIdC/CMakeCCompilerId.c
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/3.22.22040401-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/CMakeOutput.log
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/ShowIncludes/foo.h
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/ShowIncludes/main.c
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/TargetDirectories.txt
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/cmake.check_cache
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/CMakeFiles/rules.ninja
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/Testing/Temporary/LastTest.log
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/VSInheritEnvironments.txt
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/build.ninja
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/cmake_install.cmake
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/cpp_concurrency_code/CMakeFiles/cpp_concurrency_code.dir/vc140.pdb
+        new file:   cpp_concurrency_2nd/cpp_concurrency_code/out/build/x64-debug/cpp_concurrency_code/cmake_install.cmake
+
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git reset --hard
+HEAD is now at 8f9bc57 Initial commit
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ vi .gitignore
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
+$ git fsck --lost-found
+Checking object directories: 100% (256/256), done.
+Checking objects: 100% (4/4), done.
+dangling blob 00e8b893caa3659f1842c6b548b3d8276367efee
+dangling blob 0bef31932143230306c53e4694fd783189951fa1
+dangling blob 141ca2f2fb1aeac0d3e1be54968c4555c5b903ba
+dangling blob 17013c4f16a1386b4f6ae0ab3e1f2768753c0cfd
+dangling blob 1e4584811eb022ba8e4b63e8c304738c4b484418
+dangling blob 2098572df204ea3b7ab6d8d4d7e5032f2558ef40
+dangling blob 21e0131d69f266b19be83f8278c5a84e8f42cad9
+dangling blob 25c62a8c3cb40764ac539370df9ec347bdd99b79
+dangling blob 2ad5882765923787478d8e17eff991c7b0d17260
+dangling blob 2b586359abec36925b4a5d1ea11e4e43a058aef0
+dangling blob 2c63c0851048d8f7bff41ecf0f8cee05f52fd120
+dangling blob 2cbc279667f0e368ee6b70ad409c9a4032471368
+dangling blob 34c8d66c623aafcb0dec5ce51e50beed44d75799
+dangling blob 37717af999566a53040e313cec173101c551f435
+dangling blob 3a67af9c39f7b7a29e77e875a97aa69603d1b72c
+dangling blob 3c25356e50e5694a35a53c34b3213426ecdbee63
+dangling blob 3dccd731726d7faa8b29d8d7dba3b981a53ca497
+dangling blob 3e57e01e38af87cda12a7d966991ae99684432fc
+dangling blob 405acce37c0af8ace106d7ef0cac3eaec4615024
+dangling blob 41b99d7783c1e447962d3183b641863e61a8edd0
+dangling blob 498b7c567d33b4bc7539f91aa7efa39068929d24
+dangling blob 4f5588a5ff3f780a3684f0b7df7f6388ebc7f7bf
+dangling blob 547ebd9462228cd824595a163007c63508cfb4b3
+dangling blob 5aaa780d5e599f36cf5c53784ea86fedb03a3da5
+dangling blob 5ad0b707fe88e1c664ffc8e12aeab2e798b99784
+dangling blob 5f2d4364110a608e2957d3159ef074426c10fa24
+dangling blob 61a8f0284bd55ed55e9cbaf8f9c1723a628f0d55
+dangling blob 61ba33d1309ae71542a3d779f68d81609af72511
+dangling blob 688a3cdf027773d1c0ca2847f88c35ab0842aa81
+dangling blob 6d32db29255e67405800256fdee1acbafc5484e7
+dangling blob 753e8d09882ab618694398b9647062376781fd91
+dangling blob 757c73db7cef5b7b391a5aa860601ffc44f4b971
+dangling blob 77097a38463b433a59cb2116095f0fd2cbfd76db
+dangling blob 7d776af01723298a21119ae90e63529e03a8c8a4
+dangling blob 7f66b46d13fb92a1462436e210393f23a6f36ab3
+dangling blob 80031740df7efbd9229aa0743b2ce7a790c73f76
+dangling blob 8292790dd992acee4cdc3610193e8d5b5249646d
+dangling blob 843e5eb43957bf25268609e0e27a0b5ecad80851
+dangling blob 86eb901b2e0c48128b0f3673b11273df70cc55d2
+dangling blob 89428f379fa746d09d25ad9acd98d0a843531849
+dangling blob 8af88522708171205ee6e4ad13bea99d69d44ae5
+dangling blob 8b137891791fe96927ad78e64b0aad7bded08bdc
+dangling blob 909db20dc648296c09d32fc1d47c3476c1dc5b8a
+dangling blob 8fb03806442c4d96b8ff09ec23acfe4f5d2b6f2d
+dangling blob 92eafa8654be0af509a7027637d2a7cff74864c4
+dangling blob 92feee3bf590446adea26432cec3f2d987436d30
+dangling blob 98d5e6833c735f2ec30e6d592b1be24270fbb9d1
+dangling blob 9c0ce3ae3906ead7af020bcb3dd5e20511fd9779
+dangling blob abf4065996bb39a4d5fa42c0484c4af1bc46b5be
+dangling blob ac72404f99cf844074a2e7a5dbd474aa4f1ce522
+dangling blob b3f6a3a88978a9eea7e5ea6ce3ff2c55119e4ac3
+dangling blob c0a5702d12f839242595d647455a3e43140d4c7c
+dangling blob c13d13aac3e786f5f53c920fae798dc70c56a18e
+dangling blob cd18352ad8a2fa47bda44dec394df4f52c885152
+dangling blob cd3cbc1ff2bb98932520c792d7f0a82e1e877d80
+dangling blob d30287b6dabff674ba3f3a4a5c8710847c3afc62
+dangling blob d4362edb4b01d0d44d83b38789c10d301d68fb32
+dangling blob d48be5b858df2f05a7bf36eb0539d837f6cc00ab
+dangling blob d64ce91b2d558188ab0c61c8541ddbc4902bc5f6
+dangling blob e1e911b4922379852c6e371936978c3f309a59ae
+dangling blob e3146898de90f579da3de23662cac45e3bfe6886
+dangling blob e5675ec1d586af8d236baf921ad7835de2df96ac
+dangling blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+dangling blob e8775a02a72f9cd5e9df7c826914cda6e094015b
+dangling blob edc3b8484c8fbf8d5e07d7db1efc5e4186def990
+dangling blob f04aaae8165c6f8229535f878dcd40d3af1d02bf
+dangling blob f0ab182382d78ab21c6052c7056978b1ff83e85e
+dangling blob f3c78793af5672a3be09e9fab614c2456e371a10
+dangling blob f41b834c1c1468f1131a7aab7a53dccb8699d7bb
+dangling blob f455328c91f72da72fb383f1bb5bf006b96767f4
+dangling blob f6303905aabc0fb5cf3da3b36df4c7c394503c07
+dangling blob f714886c49021ee6327d30143574467eeed71933
+dangling blob f8cc9d8acececa5889772afcf808dd35dc59a7ed
+dangling blob f91b148185ac4fb1bc9bbb93795e1a9dc7ca09c6
+
+asdf@DESKTOP-3MA5SUF MINGW64 /f/my_github/ctmf (main)
