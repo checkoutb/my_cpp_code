@@ -25,6 +25,19 @@ int main()
 /*
 静态库
 
+---
+
+OpenGL/learn
+
+g++ glad.c -c -I../include    // compile
+ar rcs libmyglad.a glad.o     // create .so
+
+g++ -c my_shader.cpp -I/xxxx/include -lmyglad -L./    // compile
+ar rs libmyglad.a my_shader.o                         // (r) insert into .so  and  (s) flush symbol table
+
+---
+
+
 
 生成
 

@@ -1,5 +1,10 @@
 
 
+!!!@See joplin/cpp_lib_manage。  new -> add -> install
+
+
+
+
 
 https://zhuanlan.zhihu.com/p/656128456
 这里的更加全面点，但我的代码是从官方的教程里抄的。
@@ -56,7 +61,7 @@ zlib version is 1.3.1
 
 # add version by git commit
 
-在 vcpkf 根目录下
+在 vcpkg 根目录下
 `git show 3426db05b996481ca31e95fff3734cf23e0f51bc:versions/baseline.json | egrep -A 3 -e '"zlib"|"fmt"'`
 看到输出
 ```text
